@@ -9,43 +9,41 @@ namespace GradeBook
     public class Book
     {
         private List<double> grades;
-        private string name;
+        public string Name;
 
         public Book(string name)
         {
             grades = new List<double>();
-            this.name = name;
+            Name = name;
         }
 
 
         public void AddGrade(double grade)
         {
-            grades.Add(grade);
-            Console.WriteLine();
-        }
-        public void ShowStatistics()
-        {
-            double result = 0.00;
-            var highGrade = double.MinValue;
-            var lowGrade = double.MaxValue;
-
-            foreach (var grade in grades)
+            if (grade <= 100 && grade >= 0)
             {
-                if (highGrade < grade)
-                {
-                    highGrade = grade;
-                }
+                grades.Add(grade);
+            } else
+            {
+                Console.WriteLine($"Attempted to add an invalid value of {grade}");
+            }
+        }
+        public Statistics GetStatistics()
+        {
+            var result = new Statistics();
+            result.High = double.MinValue;
+            result.Low = double.MaxValue;
 
-                if (lowGrade > grade)
-                {
-                    lowGrade = grade;
-                }
-                result += grade;
+            for (var i = 0; i < grades.Count; i++)
+            {
+                result.Low = Math.Min(grades[i], result.Low);
+                result.High = Math.Max(grades[i], result.High);
+                result.Average += grades[i];
             };
 
-            Console.WriteLine($"this is avg grade: {result / grades.Count:N1}");
-            Console.WriteLine($"this is the highestGrade: {highGrade}");
-            Console.WriteLine($"this is the lowestGrade: {lowGrade}");
+            result.Average /= grades.Count;
+
+            return result;
         }
     }
 }
