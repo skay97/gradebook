@@ -1,2 +1,2 @@
 # gradebook
-A GradeBook application created with C# and .Net Framework
+A GradeBook console application created with C# and .Net Framework
