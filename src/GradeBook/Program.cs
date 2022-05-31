@@ -8,14 +8,45 @@ namespace GradeBook
         static void Main(string[] args)
         {
             var book = new Book("Salman's Grade Book");
-            book.AddGrade(89.1);
-            book.AddGrade(90.5);
-            book.AddGrade(101);
+
+            while (true)
+            {
+                Console.WriteLine("Enter a grade or 'q' to quit");
+                var input = Console.ReadLine();
+                if (input == "q")
+                {
+                    Console.WriteLine("Thank you for inputting your grades.");
+                    break;
+                }
+
+                try
+                {
+                    var grade = double.Parse(input);
+                    book.AddGrade(grade);
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.WriteLine($"{ex.Message}");
+                }
+                catch(FormatException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
+                // Todo: implement finally logic
+                finally
+                {
+                    Console.WriteLine("**");
+                }
+            }
+            
+
             var stats = book.GetStatistics();
 
-            Console.WriteLine($"this is avg grade: {stats.Average:N1}");
-            Console.WriteLine($"this is the highestGrade: {stats.High}");
-            Console.WriteLine($"this is the lowestGrade: {stats.Low}");
+            Console.WriteLine($"Average grade: {stats.Average:N1}");
+            Console.WriteLine($"Highest Grade: {stats.High}");
+            Console.WriteLine($"Lowest Grade: {stats.Low}");
+            Console.WriteLine($"Average letter Grade: {stats.Letter}");
         }
     }
 }
