@@ -11,6 +11,20 @@ namespace GradeBook
 
             book.GradeAdded += OnGradeAdded;
 
+            EnterGrades(book);
+
+            var stats = book.GetStatistics();
+
+            Console.WriteLine($"For the book named {book.Name}");
+            Console.WriteLine($"The catergory is: {Book.CATEGORY}");
+            Console.WriteLine($"Average grade: {stats.Average:N1}");
+            Console.WriteLine($"Highest Grade: {stats.High}");
+            Console.WriteLine($"Lowest Grade: {stats.Low}");
+            Console.WriteLine($"Average letter Grade: {stats.Letter}");
+        }
+
+        private static void EnterGrades(Book book)
+        {
             while (true)
             {
                 Console.WriteLine("Enter a grade or 'q' to quit");
@@ -30,7 +44,7 @@ namespace GradeBook
                 {
                     Console.WriteLine($"{ex.Message}");
                 }
-                catch(FormatException ex)
+                catch (FormatException ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
@@ -41,16 +55,6 @@ namespace GradeBook
                     Console.WriteLine("**");
                 }
             }
-            
-
-            var stats = book.GetStatistics();
-
-            Console.WriteLine($"For the book named {book.Name}");
-            Console.WriteLine($"The catergory is: {Book.CATEGORY}");
-            Console.WriteLine($"Average grade: {stats.Average:N1}");
-            Console.WriteLine($"Highest Grade: {stats.High}");
-            Console.WriteLine($"Lowest Grade: {stats.Low}");
-            Console.WriteLine($"Average letter Grade: {stats.Letter}");
         }
 
         static void OnGradeAdded(object sender, EventArgs e)
