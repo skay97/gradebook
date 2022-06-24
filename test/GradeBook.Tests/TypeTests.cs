@@ -3,8 +3,44 @@ using System;
 
 namespace GradeBook.Tests
 {
+
+    public delegate string WriteLogDelegate (string logMessage);
+
     public class TypeTests
     {
+
+        int count = 0;
+
+        [Fact]
+        public void WriteLogDelegateCanPointToMethod()
+        {
+            // Long notation to assign the write delegate log
+            // log = new WriteLogDelegate(ReturnMessage);
+
+            // Short form to assighn a delegate
+            //log = ReturnMessage;
+
+            WriteLogDelegate log = ReturnMessage;
+            log += ReturnMessage;
+            log += IncrementCount;
+
+            string result = log("Hello!");
+
+            Assert.Equal(3,count);
+        }
+
+        string IncrementCount(string message)
+        {
+            count++;
+            return message.ToLower();
+        }
+
+        string ReturnMessage(string message)
+        {
+            count++;
+            return message;
+        }
+
         [Fact]
         public void ValueTypesAlsoPassByValue()
         {
@@ -81,13 +117,9 @@ namespace GradeBook.Tests
             var book1 = GetBook("Book 1");
             var book2 = GetBook("Book 2");
 
-            //Act
-
-
             //Assert
             Assert.Equal("Book 2", book2.Name);
             Assert.NotSame(book1, book2);
-
         }
 
         [Fact]
