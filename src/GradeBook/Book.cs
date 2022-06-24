@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 
 namespace GradeBook
 {
+
+    public delegate void GradeAddedDelegate(object sender, EventArgs args);
+
     public class Book
     {
         private List<double> grades;
         public string Name { get; set; }
         
         public const string CATEGORY = "Science";
+
+        public event GradeAddedDelegate GradeAdded;
 
         public Book(string name)
         {
@@ -44,6 +49,11 @@ namespace GradeBook
             if (grade <= 100 && grade >= 0)
             {
                 grades.Add(grade);
+
+                if (GradeAdded != null)
+                {
+                    GradeAdded(this, new EventArgs());
+                }
             } else
             {
                 throw new ArgumentException($"Invalid input: {grade}");
