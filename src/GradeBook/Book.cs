@@ -9,7 +9,7 @@ namespace GradeBook
     public class Book
     {
         private List<double> grades;
-        public string Name { get; private set; }
+        public string Name { get; set; }
         
         public const string CATEGORY = "Science";
 
