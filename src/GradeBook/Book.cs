@@ -6,19 +6,17 @@ using System.Threading.Tasks;
 
 namespace GradeBook
 {
-
     public delegate void GradeAddedDelegate(object sender, EventArgs args);
 
-    public class Book
+    public class Book : NamedObject
     {
         private List<double> grades;
-        public string Name { get; set; }
         
         public const string CATEGORY = "Science";
 
         public event GradeAddedDelegate GradeAdded;
 
-        public Book(string name)
+        public Book(string name) : base(name)
         {
             grades = new List<double>();
             Name = name;
