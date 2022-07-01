@@ -6,12 +6,27 @@ using System.Threading.Tasks;
 
 namespace GradeBook
 {
-    public abstract class Book : NamedObject
+    public interface IBook
+    {
+        void AddGrade(double Grade);
+        Statistics GetStatistics();
+        string Name { get; set; }
+        event GradeAddedDelegate GradeAdded;
+    }
+
+    public abstract class Book : NamedObject, IBook
     {
         protected Book(string name) : base(name)
         {
         }
 
+        public virtual event GradeAddedDelegate GradeAdded;
+
         public abstract void AddGrade(double grade);
+
+        public virtual Statistics GetStatistics()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

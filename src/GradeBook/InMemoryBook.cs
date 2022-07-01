@@ -11,7 +11,7 @@ namespace GradeBook
         
         public const string CATEGORY = "Science";
 
-        public event GradeAddedDelegate GradeAdded;
+        public override event GradeAddedDelegate GradeAdded;
 
         public InMemoryBook(string name) : base(name)
         {
@@ -54,7 +54,7 @@ namespace GradeBook
                 throw new ArgumentException($"Invalid input: {grade}");
             }
         }
-        public Statistics GetStatistics()
+        public override Statistics GetStatistics()
         {
             var result = new Statistics();
             result.High = double.MinValue;

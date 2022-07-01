@@ -23,7 +23,7 @@ namespace GradeBook
             Console.WriteLine($"Average letter Grade: {stats.Letter}");
         }
 
-        private static void EnterGrades(Book book)
+        private static void EnterGrades(IBook book)
         {
             while (true)
             {
