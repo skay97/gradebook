@@ -8,6 +8,8 @@ namespace GradeBook
         static void Main(string[] args)
         {
             var book = new InMemoryBook("Salman's Grade Book");
+            // Following can be uncommented to store grades in memory
+            //var book = new DiskBook("Salman's Grade Book");
 
             book.GradeAdded += OnGradeAdded;
 
@@ -16,7 +18,7 @@ namespace GradeBook
             var stats = book.GetStatistics();
 
             Console.WriteLine($"For the book named {book.Name}");
-            Console.WriteLine($"The catergory is: {InMemoryBook.CATEGORY}");
+            Console.WriteLine($"The catergory is: {InMemoryBook.CATEGORY}"); // const members can only be accessed statically
             Console.WriteLine($"Average grade: {stats.Average:N1}");
             Console.WriteLine($"Highest Grade: {stats.High}");
             Console.WriteLine($"Lowest Grade: {stats.Low}");
